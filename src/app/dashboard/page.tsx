@@ -46,7 +46,7 @@ export default function Dashboard() {
                   <div className="ml-5 w-0 flex-1">
                     <dl>
                       <dt className="text-sm font-medium text-gray-500 truncate">
-                        Today's Orders
+                        Today&apos;s Orders
                       </dt>
                       <dd>
                         <div className="text-lg font-medium text-gray-900">
@@ -78,7 +78,7 @@ export default function Dashboard() {
                   <div className="ml-5 w-0 flex-1">
                     <dl>
                       <dt className="text-sm font-medium text-gray-500 truncate">
-                        Today's Earnings
+                        Today&apos;s Earnings
                       </dt>
                       <dd>
                         <div className="text-lg font-medium text-gray-900">

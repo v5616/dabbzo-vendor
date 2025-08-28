@@ -122,7 +122,7 @@ export default function Profile() {
     if (name.includes('.')) {
       const [parent, child] = name.split('.');
       const parentKey = parent as keyof VendorProfile;
-      const parentObj = editedProfile[parentKey] as Record<string, any>;
+      const parentObj = editedProfile[parentKey] as Record<string, string | number | boolean>;
       
       setEditedProfile({
         ...editedProfile,
@@ -139,7 +139,7 @@ export default function Profile() {
     }
   };
 
-  const handleBusinessHoursChange = (day: string, field: string, value: any) => {
+  const handleBusinessHoursChange = (day: string, field: string, value: string | boolean) => {
     if (!editedProfile) return;
     
     setEditedProfile({

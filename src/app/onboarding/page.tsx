@@ -76,7 +76,7 @@ export default function Onboarding() {
             <form onSubmit={(e) => { e.preventDefault(); handleNextStep(); }}>
               <div className="space-y-6">
                 <div>
-                  <label htmlFor="kitchenName" className="block text-sm font-medium text-gray-700">Kitchen Name</label>
+                  <label htmlFor="kitchenName" className="block text-sm font-medium text-gray-700">Kitchen&apos;s Name</label>
                   <input
                     type="text"
                     id="kitchenName"
@@ -167,7 +167,7 @@ export default function Onboarding() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium text-gray-900">Business Hours</h3>
-                  <p className="mt-1 text-sm text-gray-500">Set your kitchen's operating hours</p>
+                  <p className="mt-1 text-sm text-gray-500">Set your kitchen&apos;s operating hours</p>
                   
                   <div className="mt-4 space-y-4">
                     {Object.entries(businessHours).map(([day, hours]) => (

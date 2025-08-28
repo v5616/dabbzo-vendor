@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 
 export default function AddDish() {
@@ -17,8 +18,7 @@ export default function AddDish() {
     isAvailable: true
   });
   
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -40,7 +40,6 @@ export default function AddDish() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      setImageFile(file);
       
       // Create preview
       const reader = new FileReader();
@@ -156,10 +155,12 @@ export default function AddDish() {
                         <div className="space-y-1 text-center">
                           {imagePreview ? (
                             <div className="mb-4">
-                              <img 
+                              <Image 
                                 src={imagePreview} 
                                 alt="Preview" 
-                                className="mx-auto h-32 w-32 object-cover rounded-md" 
+                                width={128}
+                                height={128}
+                                className="mx-auto object-cover rounded-md" 
                               />
                             </div>
                           ) : (

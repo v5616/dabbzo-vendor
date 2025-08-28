@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -43,7 +44,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
           
           <div className="flex-shrink-0 flex items-center px-4">
-            <img src="/logo512.png" alt="Dabbzo Logo" className="h-8 w-8 mr-2" />
+            <Image src="/logo512.png" alt="Dabbzo Logo" width={32} height={32} className="mr-2" />
             <h1 className="text-xl font-bold" style={{ color: colors.primary }}>Dabbzo Vendor</h1>
           </div>
           
@@ -84,12 +85,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
           <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
             <div className="flex items-center flex-shrink-0 px-4">
-              <img src="/logo512.png" alt="Dabbzo Logo" className="h-8 w-8 mr-2" />
+              <Image src="/logo512.png" alt="Dabbzo Logo" width={32} height={32} className="mr-2" />
               <h1 className="text-xl font-bold" style={{ color: colors.primary }}>Dabbzo Vendor</h1>
             </div>
             
-            <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
-              {navigation.map((item) => (
+            <nav className="mt-5 flex-1 px-2 bg-white space-y-1">{navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -149,7 +149,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <MenuIcon className="h-6 w-6" />
           </button>
           <div className="flex items-center pr-4">
-            <img src="/logo512.png" alt="Dabbzo Logo" className="h-8 w-8 mr-2" />
+            <Image src="/logo512.png" alt="Dabbzo Logo" width={32} height={32} className="mr-2" />
             <span className="text-lg font-semibold" style={{ color: colors.primary }}>Dabbzo Vendor</span>
           </div>
         </div>

@@ -175,13 +175,13 @@ export default function Support() {
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">How do I update my menu?</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    You can update your menu from the Menu section. Click on "Add Dish" to add new items or edit existing ones.
+                    You can update your menu from the Menu section. Click on &quot;Add Dish&quot; to add new items or edit existing ones.
                   </dd>
                 </div>
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">When will I receive my payments?</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    Payments are processed every Monday for the previous week's orders. It takes 1-2 business days for the amount to reflect in your bank account.
+                    Payments are processed every Monday for the previous week&apos;s orders. It takes 1-2 business days for the amount to reflect in your bank account.
                   </dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

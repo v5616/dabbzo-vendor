@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/layouts/DashboardLayout';
 
@@ -21,7 +21,7 @@ interface Order {
   specialInstructions?: string;
 }
 
-export default function Orders() {
+function OrdersContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'pending');
@@ -119,6 +119,7 @@ export default function Orders() {
   };
 
   const handleAcceptOrder = (orderId: string) => {
+    // In a real app, this would be an API call
     setOrders(orders.map(order => 
       order.id === orderId ? { ...order, status: 'accepted' } : order
     ));
@@ -126,11 +127,7 @@ export default function Orders() {
   };
 
   const handleRejectOrder = (orderId: string) => {
-    if (!rejectReason.trim()) {
-      alert('Please provide a reason for rejection');
-      return;
-    }
-    
+    // In a real app, this would be an API call
     setOrders(orders.map(order => 
       order.id === orderId ? { ...order, status: 'rejected' } : order
     ));
@@ -138,6 +135,7 @@ export default function Orders() {
   };
 
   const handleCompleteOrder = (orderId: string) => {
+    // In a real app, this would be an API call
     setOrders(orders.map(order => 
       order.id === orderId ? { ...order, status: 'completed' } : order
     ));
@@ -147,88 +145,80 @@ export default function Orders() {
   const filteredOrders = orders.filter(order => order.status === activeTab);
 
   return (
-    <DashboardLayout>
-      <div className="py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900">Orders Management</h1>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          {/* Tabs */}
-          <div className="mt-6 border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-              {['pending', 'accepted', 'rejected', 'completed'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => handleTabChange(tab)}
-                  className={`${
-                    activeTab === tab
-                      ? 'border-indigo-500 text-indigo-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize`}
-                >
-                  {tab}
-                  {tab === 'pending' && (
-                    <span className="ml-2 py-0.5 px-2.5 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
-                      {orders.filter(order => order.status === 'pending').length}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </nav>
-          </div>
+    <>
+      {/* Tabs */}
+      <div className="mt-6 border-b border-gray-200">
+        <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+          {['pending', 'accepted', 'rejected', 'completed'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => handleTabChange(tab)}
+              className={`${
+                activeTab === tab
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize`}
+            >
+              {tab}
+              {tab === 'pending' && (
+                <span className="ml-2 py-0.5 px-2.5 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
+                  {orders.filter(order => order.status === 'pending').length}
+                </span>
+              )}
+            </button>
+          ))}
+        </nav>
+      </div>
 
-          {/* Orders List */}
-          {loading ? (
-            <div className="mt-6 text-center py-10">
-              <p className="text-gray-500">Loading orders...</p>
-            </div>
-          ) : filteredOrders.length === 0 ? (
-            <div className="mt-6 text-center py-10 bg-white rounded-lg shadow">
-              <p className="text-gray-500">No {activeTab} orders found.</p>
-            </div>
-          ) : (
-            <div className="mt-6 bg-white shadow overflow-hidden sm:rounded-md">
-              <ul className="divide-y divide-gray-200">
-                {filteredOrders.map((order) => (
-                  <li key={order.id}>
-                    <div className="block hover:bg-gray-50">
-                      <div className="px-4 py-4 sm:px-6">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <p className="text-sm font-medium text-indigo-600 truncate">{order.id}</p>
-                            <p className="ml-4 text-sm text-gray-500">
-                              {new Date(order.orderTime).toLocaleString()}
-                            </p>
-                          </div>
-                          <div className="ml-2 flex-shrink-0 flex">
-                            <button
-                              onClick={() => openOrderDetails(order)}
-                              className="px-3 py-1 text-sm text-indigo-600 hover:text-indigo-900 font-medium"
-                            >
-                              View Details
-                            </button>
-                          </div>
-                        </div>
-                        <div className="mt-2 sm:flex sm:justify-between">
-                          <div className="sm:flex">
-                            <p className="flex items-center text-sm text-gray-500">
-                              {order.customer.name} • {order.customer.phone}
-                            </p>
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                            <p>₹{order.total.toFixed(2)} • {order.items.length} items</p>
-                          </div>
-                        </div>
+      {/* Orders List */}
+      {loading ? (
+        <div className="mt-6 text-center py-10">
+          <p className="text-gray-500">Loading orders...</p>
+        </div>
+      ) : filteredOrders.length === 0 ? (
+        <div className="mt-6 text-center py-10 bg-white rounded-lg shadow">
+          <p className="text-gray-500">No {activeTab} orders found.</p>
+        </div>
+      ) : (
+        <div className="mt-6 bg-white shadow overflow-hidden sm:rounded-md">
+          <ul className="divide-y divide-gray-200">
+            {filteredOrders.map((order) => (
+              <li key={order.id}>
+                <div className="block hover:bg-gray-50">
+                  <div className="px-4 py-4 sm:px-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <p className="text-sm font-medium text-indigo-600 truncate">{order.id}</p>
+                        <p className="ml-4 text-sm text-gray-500">
+                          {new Date(order.orderTime).toLocaleString()}
+                        </p>
+                      </div>
+                      <div className="ml-2 flex-shrink-0 flex">
+                        <button
+                          onClick={() => openOrderDetails(order)}
+                          className="px-3 py-1 text-sm text-indigo-600 hover:text-indigo-900 font-medium"
+                        >
+                          View Details
+                        </button>
                       </div>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+                    <div className="mt-2 sm:flex sm:justify-between">
+                      <div className="sm:flex">
+                        <p className="flex items-center text-sm text-gray-500">
+                          {order.customer.name} • {order.customer.phone}
+                        </p>
+                      </div>
+                      <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                        <p>₹{order.total.toFixed(2)} • {order.items.length} items</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+      )}
 
       {/* Order Details Modal */}
       {isModalOpen && selectedOrder && (
@@ -347,6 +337,24 @@ export default function Orders() {
           </div>
         </div>
       )}
+    </>
+  );
+}
+
+export default function Orders() {
+  return (
+    <DashboardLayout>
+      <div className="py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <h1 className="text-2xl font-semibold text-gray-900">Orders Management</h1>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <Suspense fallback={<div>Loading orders...</div>}>
+            <OrdersContent />
+          </Suspense>
+        </div>
+      </div>
     </DashboardLayout>
   );
 }
