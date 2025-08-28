@@ -16,6 +16,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Dabbzo Vendor Portal",
   description: "Manage your food business with Dabbzo Vendor Portal",
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [
+      { url: '/logo512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({

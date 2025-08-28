@@ -43,6 +43,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
           
           <div className="flex-shrink-0 flex items-center px-4">
+            <img src="/logo512.png" alt="Dabbzo Logo" className="h-8 w-8 mr-2" />
             <h1 className="text-xl font-bold" style={{ color: colors.primary }}>Dabbzo Vendor</h1>
           </div>
           
@@ -83,6 +84,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
           <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
             <div className="flex items-center flex-shrink-0 px-4">
+              <img src="/logo512.png" alt="Dabbzo Logo" className="h-8 w-8 mr-2" />
               <h1 className="text-xl font-bold" style={{ color: colors.primary }}>Dabbzo Vendor</h1>
             </div>
             
@@ -137,7 +139,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Mobile header */}
       <div className="md:pl-64 flex flex-col flex-1">
-        <div className="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-white">
+        <div className="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-white flex items-center justify-between">
           <button
             type="button"
             className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -146,6 +148,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <span className="sr-only">Open sidebar</span>
             <MenuIcon className="h-6 w-6" />
           </button>
+          <div className="flex items-center pr-4">
+            <img src="/logo512.png" alt="Dabbzo Logo" className="h-8 w-8 mr-2" />
+            <span className="text-lg font-semibold" style={{ color: colors.primary }}>Dabbzo Vendor</span>
+          </div>
         </div>
 
         <main className="flex-1">

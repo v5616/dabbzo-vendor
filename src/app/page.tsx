@@ -17,12 +17,11 @@ export default function Home() {
       <div className="text-center">
         <div className="flex justify-center mb-8">
           <Image
-            src="/next.svg"
+            src="/logo512.png"
             alt="Dabbzo Logo"
-            width={180}
-            height={38}
+            width={64}
+            height={64}
             priority
-            className="dark:invert"
           />
         </div>
         <h1 className="text-2xl font-semibold text-gray-900 mb-2">Dabbzo Vendor Portal</h1>
